@@ -1,0 +1,11 @@
+
+version: '2'
+
+services:
+  quantinuum-shopping-cart:
+    image: quantinuum-shopping-cart:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
