@@ -1,8 +1,15 @@
 
-FROM microsoft/aspnetcore:1.0.1
+#Linux=FROM microsoft/aspnetcore:1.0.1
+FROM microsoft/dotnet:nanoserver
+
 LABEL Name=quantinuum-shopping-cart Version=0.0.1 
+
 ARG source=.
 WORKDIR /app
-EXPOSE 3000
+ENV ASPNETCORE_URLS http://+:3000
 COPY $source .
-ENTRYPOINT dotnet quantinuum-shopping-cart.dll
+EXPOSE 3000
+
+RUN dotnet restore
+ENTRYPOINT ["dotnet", "run"]
+#ENTRYPOINT ["dotnet", "NancyTemplate.dll"]
