@@ -2,7 +2,7 @@
 #Linux=FROM microsoft/aspnetcore:1.0.1
 FROM microsoft/dotnet:nanoserver
 
-LABEL Name=quantinuum-shopping-cart Version=0.0.1 
+#LABEL Name=quantinuum-shopping-cart Version=0.0.1 
 
 ARG source=.
 WORKDIR /app
