@@ -17,22 +17,25 @@ $serviceName = $env:RELEASE_DEFINITIONNAME + $env:RELEASE_ENVIRONMENTNAME
 write-host "serviceName: $serviceName"
 
 # Check the service already created 
-$isServiceExists = docker service ls -f "name=$serviceName"
-write-host "isServiceExists: $isServiceExists"
-write-host "isServiceExists[1]: $isServiceExists[1]"
+$serviceInfo = docker service ls -f "name=$serviceName"
+write-host "serviceInfo: $serviceInfo"
+write-host "serviceInfo[1]: $serviceInfo[1]"
+
+# Find the service
+$foundService = $serviceInfo[1] -match '$serviceName'
+write-host "foundService: $foundService"
 
 # If services exists then update, else create.
-if( ! ($isServiceExists[1]))
+if($foundService)
 {
+    write-host "Update the service!"
+    # use VSTS Release Manager environment name to define service to update
+    docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
+}
+else {
     write-host "Create the service!"
     #Create the service
     docker service create --name $serviceName -p mode=host,target=$port,published=$port --constraint node.labels.environment==$env:RELEASE_ENVIRONMENTNAME dtr.neudemo.net/neudesic/shoppingcartservice:latest
-}
-else {
-    write-host "Update the service!"
-    
-    # use VSTS Release Manager environment name to define service to update
-    docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
 }
 
 # give Docker a second to update the service, otherwise the previous service will return a 200
