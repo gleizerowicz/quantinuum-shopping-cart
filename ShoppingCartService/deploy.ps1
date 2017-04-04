@@ -9,6 +9,7 @@ Import-Module .\env.ps1
 write-host "environment: $env:RELEASE_ENVIRONMENTNAME"
 write-host "build number: $env:BUILD_BUILDNUMBER"
 write-host "definitionName: $env:RELEASE_DEFINITIONNAME"
+write-host "port: $port"
 
 # Service Name
 $serviceName = $env:RELEASE_DEFINITIONNAME + $env:RELEASE_ENVIRONMENTNAME
