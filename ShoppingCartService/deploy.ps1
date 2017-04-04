@@ -11,6 +11,17 @@ write-host "definitionName: $env:RELEASE_DEFINITIONNAME"
 $serviceName = $env:RELEASE_DEFINITIONNAME + $env:RELEASE_ENVIRONMENTNAME
 write-host "serviceName: $serviceName"
 
+$isServiceExists = docker service ls -f "name=$serviceName"
+write-host "isServiceExists: $isServiceExists"
+
+if($isServiceExists[1] -eq $null)
+{
+    write-host "Create"
+}
+else {
+    write-host "Update: $isServiceExists[1]"
+}
+
 # use VSTS Release Manager environment name to define service to update
 docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
 
