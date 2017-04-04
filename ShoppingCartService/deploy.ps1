@@ -19,10 +19,9 @@ write-host "serviceName: $serviceName"
 # Check the service already created 
 $serviceInfo = docker service ls -f "name=$serviceName"
 write-host "serviceInfo: $serviceInfo"
-write-host "serviceInfo[1]: $serviceInfo[1]"
 
 # Find the service
-$foundService = $serviceInfo[1] -match '$serviceName'
+$foundService = $serviceInfo -match $serviceName
 write-host "foundService: $foundService"
 
 # If services exists then update, else create.
