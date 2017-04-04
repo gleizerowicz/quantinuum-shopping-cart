@@ -6,9 +6,9 @@ FROM microsoft/dotnet:nanoserver
 
 ARG source=.
 WORKDIR /app
-ENV ASPNETCORE_URLS http://+:3000
+ENV ASPNETCORE_URLS "http://+:8000;http://+:8001;http://+:8002" 
 COPY $source .
-EXPOSE 3000
+EXPOSE 8000 8001 8002
 
 RUN dotnet restore
 ENTRYPOINT ["dotnet", "run"]
