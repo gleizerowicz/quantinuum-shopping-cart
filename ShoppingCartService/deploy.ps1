@@ -1,3 +1,6 @@
+param (
+    $port
+ )
 # Need to be managing the swarm, not the local Docker host, this requires a cert bundle
 cd C:\Users\Administrator\Documents\ucp-bundle-admin
 Import-Module .\env.ps1
@@ -6,24 +9,29 @@ Import-Module .\env.ps1
 write-host "environment: $env:RELEASE_ENVIRONMENTNAME"
 write-host "build number: $env:BUILD_BUILDNUMBER"
 write-host "definitionName: $env:RELEASE_DEFINITIONNAME"
+write-host "port: $port"
 
 # Service Name
 $serviceName = $env:RELEASE_DEFINITIONNAME + $env:RELEASE_ENVIRONMENTNAME
 write-host "serviceName: $serviceName"
 
+# Check the service already created 
 $isServiceExists = docker service ls -f "name=$serviceName"
 write-host "isServiceExists: $isServiceExists"
 
+# If services exists then update, else create.
 if($isServiceExists[1] -eq $null)
 {
-    write-host "Create"
+    write-host "Create the service!"
+    #Create the service
+    docker service create --name $serviceName -p mode=host,target=$port,published=$port --constraint node.labels.environment==$env:RELEASE_ENVIRONMENTNAME dtr.neudemo.net/neudesic/shoppingcartservice:latest
 }
 else {
-    write-host "Update: $isServiceExists[1]"
+    write-host "Update the service!"
+    
+    # use VSTS Release Manager environment name to define service to update
+    docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
 }
-
-# use VSTS Release Manager environment name to define service to update
-docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
 
 # give Docker a second to update the service, otherwise the previous service will return a 200
 sleep -Seconds 10
