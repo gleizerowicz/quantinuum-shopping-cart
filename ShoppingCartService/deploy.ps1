@@ -1,6 +1,7 @@
 param (
     $port
  )
+
 # Need to be managing the swarm, not the local Docker host, this requires a cert bundle
 cd C:\Users\Administrator\Documents\ucp-bundle-admin
 Import-Module .\env.ps1
@@ -18,9 +19,10 @@ write-host "serviceName: $serviceName"
 # Check the service already created 
 $isServiceExists = docker service ls -f "name=$serviceName"
 write-host "isServiceExists: $isServiceExists"
+write-host "isServiceExists[1]: $isServiceExists[1]"
 
 # If services exists then update, else create.
-if($isServiceExists[1] -eq $null)
+if( ! ($isServiceExists[1]))
 {
     write-host "Create the service!"
     #Create the service
