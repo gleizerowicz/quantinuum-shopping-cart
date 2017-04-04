@@ -12,7 +12,7 @@ $serviceName = $env:RELEASE_DEFINITIONNAME + $env:RELEASE_ENVIRONMENTNAME
 write-host "serviceName: $serviceName"
 
 # use VSTS Release Manager environment name to define service to update
-docker service update --image dtr.neudemo.net/admin/shoppingcartservice:latest $serviceName
+docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
 
 # give Docker a second to update the service, otherwise the previous service will return a 200
 sleep -Seconds 10
