@@ -1,4 +1,5 @@
 param (
+    $dtrOrganization,
     $port
  )
 
@@ -29,12 +30,12 @@ if($foundService)
 {
     write-host "Update the service!"
     # use VSTS Release Manager environment name to define service to update
-    docker service update --image dtr.neudemo.net/neudesic/shoppingcartservice:latest $serviceName
+    docker service update --image $dtrOrganization/$env:RELEASE_DEFINITIONNAME:$env:BUILD_BUILDNUMBER $serviceName
 }
 else {
     write-host "Create the service!"
     #Create the service
-    docker service create --name $serviceName -p mode=host,target=$port,published=$port --constraint node.labels.environment==$env:RELEASE_ENVIRONMENTNAME dtr.neudemo.net/neudesic/shoppingcartservice:latest
+    docker service create --name $serviceName -p mode=host,target=$port,published=$port --constraint node.labels.environment==$env:RELEASE_ENVIRONMENTNAME $dtrOrganization/$env:RELEASE_DEFINITIONNAME:$env:BUILD_BUILDNUMBER
 }
 
 # give Docker a second to update the service, otherwise the previous service will return a 200
