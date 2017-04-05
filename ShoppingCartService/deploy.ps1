@@ -41,31 +41,28 @@ else {
 sleep -Seconds 10
 
 # firstload
-$hostnames = @('www','test','dev')
+$hostname = $env:RELEASE_ENVIRONMENTNAME
+if($hostname -eq 'prod')
+{
+    $hostname = 'www'
+}
+
 do
 {
-    foreach ($hostname in $hostnames)
+    $fqdn = "$hostname.neudemo.net"
+    try
     {
-        $fqdn = "$hostname.neudemo.net"
-        try
-        {
-            $resp = Invoke-WebRequest $fqdn
-            write-host "firstloading $fqdn : $($resp.StatusCode)"
-        }
-        catch
-        {
-            write-host "firstloading $fqdn : ERROR(UNDEFINED)"
-        }
-        
-        if ($resp.StatusCode -eq 200)
-        {
-            $hostnames = $hostnames -ne $hostname
-        }
-        $resp = $null #force a fresh resp for each evaluation
+        $resp = Invoke-WebRequest $fqdn
+        write-host "firstloading $fqdn : $($resp.StatusCode)"
     }
+    catch
+    {
+        write-host "firstloading $fqdn : ERROR(UNDEFINED)"
+    }
+    $resp = $null #force a fresh resp for each evaluation
     sleep -Seconds 5
 }
-until ($hostnames.Count -eq 0)
+until ($resp.StatusCode -eq 200)
 
 
 <#
