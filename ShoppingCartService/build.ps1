@@ -1,11 +1,12 @@
  param (
     $dtrUsername,
-    $dtrPassword
+    $dtrPassword,
+    $dtrOrganization
  )
 
 # define specific build number tag, and set this build as latest in DTR
-$buildTag = "dtr.neudemo.net/neudesic/shoppingcartservice:$Env:BUILD_BUILDNUMBER"
-$latestTag = "dtr.neudemo.net/neudesic/shoppingcartservice:latest"
+$buildTag = "$dtrOrganization/$env:BUILD_DEFINITIONNAME:$Env:BUILD_BUILDNUMBER"
+$latestTag = "$dtrOrganization/$env:BUILD_DEFINITIONNAME:latest"
 
 # build and tag it
 docker build -t $buildTag -t $latestTag .
