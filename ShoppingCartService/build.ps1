@@ -10,8 +10,8 @@ write-host "definitionName: $env:BUILD_DEFINITIONNAME"
 write-host "dtrOrganization: $dtrOrganization"
 
 # define specific build number tag, and set this build as latest in DTR
-$buildTag = "$dtrOrganization/$env:BUILD_DEFINITIONNAME:$env:BUILD_BUILDNUMBER"
-$latestTag = "$dtrOrganization/$env:BUILD_DEFINITIONNAME:latest"
+$buildTag = $dtrOrganization + "/" + $env:BUILD_DEFINITIONNAME + ":" + $env:BUILD_BUILDNUMBER
+$latestTag = $dtrOrganization + "/" + $env:BUILD_DEFINITIONNAME + ":latest"
 
 # build and tag it
 docker build -t $buildTag -t $latestTag .
