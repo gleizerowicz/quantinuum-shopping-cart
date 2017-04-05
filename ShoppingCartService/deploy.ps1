@@ -49,6 +49,7 @@ if($hostname -eq 'prod')
 
 do
 {
+    $resp = $null #force a fresh resp for each evaluation
     $fqdn = "$hostname.neudemo.net"
     try
     {
@@ -59,7 +60,6 @@ do
     {
         write-host "firstloading $fqdn : ERROR(UNDEFINED)"
     }
-    $resp = $null #force a fresh resp for each evaluation
     sleep -Seconds 5
 }
 until ($resp.StatusCode -eq 200)
