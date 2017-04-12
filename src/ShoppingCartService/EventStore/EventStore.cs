@@ -7,14 +7,27 @@ namespace ShoppingCartService
 
     public class EventStore : IEventStore
     {
-        public IEnumerable<Event> GetEvents(long firstEventSequenceNumber, long lastEventSequenceNumber)
-        {
-            throw new NotImplementedException();
-        }
+        private static long currentSequenceNumber = 0;
+        private static readonly IList<Event> database = new List<Event>();
+
+        public IEnumerable<Event> GetEvents(
+          long firstEventSequenceNumber,
+          long lastEventSequenceNumber)
+          => database
+              .Where(e =>
+                e.SequenceNumber >= firstEventSequenceNumber &&
+                e.SequenceNumber <= lastEventSequenceNumber)
+              .OrderBy(e => e.SequenceNumber);
 
         public void Raise(string eventName, object content)
         {
-            throw new NotImplementedException();
+            var seqNumber = Interlocked.Increment(ref currentSequenceNumber);
+            database.Add(
+              new Event(
+                seqNumber,
+                DateTimeOffset.UtcNow,
+                eventName,
+                content));
         }
     }
 }

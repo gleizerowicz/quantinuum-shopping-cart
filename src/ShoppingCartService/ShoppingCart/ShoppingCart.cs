@@ -16,22 +16,22 @@ namespace ShoppingCartService
             this.UserId = userId;
         }
 
-        //public void AddItems(
-        //  IEnumerable<ShoppingCartItem> shoppingCartItems,
-        //  IEventStore eventStore)
-        //{
-        //    foreach (var item in shoppingCartItems)
-        //        if (this.items.Add(item))
-        //            eventStore.Raise(
-        //              "ShoppingCartItemAdded",
-        //              new { UserId, item });
-        //}
+        public void AddItems(
+          IEnumerable<ShoppingCartItem> shoppingCartItems,
+          IEventStore eventStore)
+        {
+            foreach (var item in shoppingCartItems)
+                if (this.items.Add(item))
+                    eventStore.Raise(
+                      "ShoppingCartItemAdded",
+                      new { UserId, item });
+        }
 
-        //public void RemoveItems(
-        //  int[] productCatalogueIds,
-        //  IEventStore eventStore)
-        //{
-        //    items.RemoveWhere(i => productCatalogueIds.Contains(i.ProductCatalogueId));
-        //}
+        public void RemoveItems(
+          int[] productCatalogIds,
+          IEventStore eventStore)
+        {
+            items.RemoveWhere(i => productCatalogIds.Contains(i.ProductCatalogId));
+        }
     }
 }
