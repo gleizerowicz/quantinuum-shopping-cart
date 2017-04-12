@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartService", "src\ShoppingCartService\ShoppingCartService.csproj", "{BB237B12-8888-4858-A5A2-10B301300978}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartService", "ShoppingCartService\ShoppingCartService.csproj", "{BB237B12-8888-4858-A5A2-10B301300978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartService.Unit.Tests", "tests\ShoppingCartService.Unit.Tests\ShoppingCartService.Unit.Tests.csproj", "{987D82F4-EFE7-4301-9502-A253D81651EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartService.Tests", "ShoppingCartService.Tests\ShoppingCartService.Tests.csproj", "{987D82F4-EFE7-4301-9502-A253D81651EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
