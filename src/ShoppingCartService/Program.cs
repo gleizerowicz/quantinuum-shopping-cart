@@ -8,8 +8,9 @@ namespace ShoppingCartService
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 

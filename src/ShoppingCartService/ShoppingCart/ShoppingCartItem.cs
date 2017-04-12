@@ -1,4 +1,4 @@
-namespace ShoppingCartService.ShoppingCart
+namespace ShoppingCartService
 {
     public class ShoppingCartItem
     {
@@ -7,33 +7,33 @@ namespace ShoppingCartService.ShoppingCart
         public string Desscription { get; }
         public Money Price { get; }
 
-        public ShoppingCartItem(
-          int productCatalogueId,
-          string productName,
-          string description,
-          Money price)
-        {
-            this.ProductCatalogueId = productCatalogueId;
-            this.ProductName = productName;
-            this.Desscription = description;
-            this.Price = price;
-        }
+        //public ShoppingCartItem(
+        //  int productCatalogueId,
+        //  string productName,
+        //  string description,
+        //  Money price)
+        //{
+        //    this.ProductCatalogueId = productCatalogueId;
+        //    this.ProductName = productName;
+        //    this.Desscription = description;
+        //    this.Price = price;
+        //}
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-            {
-                return false;
-            }
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj == null || GetType() != obj.GetType())
+        //    {
+        //        return false;
+        //    }
 
-            var that = obj as ShoppingCartItem;
-            return this.ProductCatalogueId.Equals(that.ProductCatalogueId);
-        }
+        //    var that = obj as ShoppingCartItem;
+        //    return this.ProductCatalogueId.Equals(that.ProductCatalogueId);
+        //}
 
-        // override object.GetHashCode
-        public override int GetHashCode()
-        {
-            return this.ProductCatalogueId.GetHashCode();
-        }
+        //// override object.GetHashCode
+        //public override int GetHashCode()
+        //{
+        //    return this.ProductCatalogueId.GetHashCode();
+        //}
     }
 }

@@ -1,9 +1,8 @@
-namespace ShoppingCartService.ShoppingCart
+namespace ShoppingCartService
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShoppingCartService.EventStore;
 
     public class ShoppingCart
     {
@@ -17,22 +16,22 @@ namespace ShoppingCartService.ShoppingCart
             this.UserId = userId;
         }
 
-        public void AddItems(
-          IEnumerable<ShoppingCartItem> shoppingCartItems,
-          IEventStore eventStore)
-        {
-            foreach (var item in shoppingCartItems)
-                if (this.items.Add(item))
-                    eventStore.Raise(
-                      "ShoppingCartItemAdded",
-                      new { UserId, item });
-        }
+        //public void AddItems(
+        //  IEnumerable<ShoppingCartItem> shoppingCartItems,
+        //  IEventStore eventStore)
+        //{
+        //    foreach (var item in shoppingCartItems)
+        //        if (this.items.Add(item))
+        //            eventStore.Raise(
+        //              "ShoppingCartItemAdded",
+        //              new { UserId, item });
+        //}
 
-        public void RemoveItems(
-          int[] productCatalogueIds,
-          IEventStore eventStore)
-        {
-            items.RemoveWhere(i => productCatalogueIds.Contains(i.ProductCatalogueId));
-        }
+        //public void RemoveItems(
+        //  int[] productCatalogueIds,
+        //  IEventStore eventStore)
+        //{
+        //    items.RemoveWhere(i => productCatalogueIds.Contains(i.ProductCatalogueId));
+        //}
     }
 }

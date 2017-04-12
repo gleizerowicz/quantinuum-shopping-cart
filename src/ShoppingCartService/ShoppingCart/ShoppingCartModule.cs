@@ -1,4 +1,4 @@
-namespace ShoppingCartService.ShoppingCart
+namespace ShoppingCartService
 {
     using Nancy;
     using Nancy.ModelBinding;

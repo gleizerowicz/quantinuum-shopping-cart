@@ -1,6 +1,6 @@
 using System;
 
-namespace ShoppingCartService.EventStore
+namespace ShoppingCartService
 {
     public struct Event
     {
