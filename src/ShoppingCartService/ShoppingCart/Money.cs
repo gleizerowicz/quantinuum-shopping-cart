@@ -1,4 +1,4 @@
-namespace ShoppingCartService.ShoppingCart
+namespace ShoppingCartService
 {
     public class Money
     {
