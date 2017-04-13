@@ -37,11 +37,5 @@ namespace ShoppingCartService
 
     }
 
-    public class TracingBootstrapper : Nancy.DefaultNancyBootstrapper
-    {
-        public override void Configure(INancyEnvironment env)
-        {
-            env.Tracing(enabled: true, displayErrorTraces: true);
-        }
-    }
+    
 }
