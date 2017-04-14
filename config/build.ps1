@@ -14,7 +14,7 @@ $buildTag = $dtrOrganization + "/" + $env:BUILD_DEFINITIONNAME + ":" + $env:BUIL
 $latestTag = $dtrOrganization + "/" + $env:BUILD_DEFINITIONNAME + ":latest"
 
 # build and tag it
-docker build -t $buildTag -t $latestTag .
+docker build -f Dockerfile.webforms -t $buildTag -t $latestTag .
 
 # login to dtr and push both build and latest
 docker login --username $dtrUsername --password $dtrPassword dtr.neudemo.net 
